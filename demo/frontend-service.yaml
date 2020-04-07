@@ -13,6 +13,6 @@ spec:
   ports:
     # the port that this service should serve on
     - port: 80
-      NodePort: 8080
+      nodePort: 30031
   selector:
     name: frontend
