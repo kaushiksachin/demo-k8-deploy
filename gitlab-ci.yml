@@ -1,0 +1,28 @@
+stages:
+  - deploy-redis-master
+  - deploy-redis-slave
+  - deploy-frontend
+
+deploy redis-master:
+  stage: deploy-redis-master
+  script:
+    - kubectl apply -f demo/redis-master-controller.yaml
+    - kubectl apply -f demo/redis-master-service.yaml
+  only:
+    - master
+
+deploy redis-slave:
+  stage: deploy-redis-slave
+  script:
+    - kubectl apply -f demo/redis-slave-controller.yaml
+    - kubectl apply -f demo/redis-slave-service.yaml
+  only:
+    - master
+
+deploy frontend:
+  stage: deploy-frontend
+  script:
+    - kubectl apply -f demo/frontend-controller.yaml
+    - kubectl apply -f demo/frontend-service.yaml
+  only:
+    - master
